@@ -49,3 +49,31 @@ exports.updatePost = async (req, res) => {
     res.status(400).json({ status: "fail" });
   }
 };
+
+exports.likePost = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const updatedPost = await Post.findByIdAndUpdate(
+      id,
+      { $inc: { likes: 1 } },
+      { new: true }
+    );
+    res.status(201).json({ status: "success", data: updatedPost });
+  } catch (err) {
+    res.status(400).json({ status: "fail", data: err });
+  }
+};
+
+exports.unlikePost = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const updatedPost = await Post.findByIdAndUpdate(
+      id,
+      { $inc: { likes: -1 } },
+      { new: true }
+    );
+    res.status(201).json({ status: "success", data: updatedPost });
+  } catch (err) {
+    res.status(400).json({ status: "fail", data: err });
+  }
+};

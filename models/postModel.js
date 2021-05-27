@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const postSchema = new mongoose.Schema({
   image: { type: String, required: [true, "A Post must have an image."] },
   author: { type: String, required: [true, "A Post must have an author."] },
-  timestamp: { type: String, default: Date.now() },
+  timestamp: { type: Number, default: Date.now },
   description: {
     type: String,
     required: [true, "A Post must have description"],
